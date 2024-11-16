@@ -3,6 +3,7 @@ package main
 import(
     "math/cmplx"
     "math"
+    //"fmt"
 )
 
 func Mgivens(A [][]complex128, k int) (complex128, complex128){
@@ -10,10 +11,10 @@ func Mgivens(A [][]complex128, k int) (complex128, complex128){
     s_k := complex(0, 0)
     f := A[k][k]
     g := A[k + 1][k]
-    if cmplx.Abs(f) < 1e-15 && cmplx.Abs(g) < 1e-15{
-        return 1 , 0
+    if math.Abs(cmplx.Abs(f)) < 1e-15 && math.Abs(cmplx.Abs(g)) < 1e-15{
+        return complex(1, 0) , complex(0, 0)
     } else {
-        denom := complex(math.Sqrt(cmplx.Abs(f)*cmplx.Abs(f) + cmplx.Abs(g)*cmplx.Abs(g)), 0)
+        denom := complex(math.Sqrt(math.Abs(cmplx.Abs(f))*math.Abs(cmplx.Abs(f)) + math.Abs(cmplx.Abs(g))*math.Abs(cmplx.Abs(g))), 0)
         c_k = cmplx.Conj(f)/denom
         s_k = cmplx.Conj(g)/denom
         return c_k, s_k
@@ -41,8 +42,9 @@ func MapplyGivens(A [][]complex128) [][]complex128{
         G_k[k][k + 1] = s_k
         Q = MatMultiply(G_k, Q)
         workingMatrix = MatMultiply(G_k, workingMatrix)
-        workingMatrix = MatMultiply(workingMatrix, Hermitian(G_k))
+       // workingMatrix = MatMultiply(workingMatrix, Hermitian(G_k))
     }
-    //workingMatrix = MatMultiply(workingMatrix, Hermitian(Q))
+    workingMatrix = MatMultiply(workingMatrix, Hermitian(Q))
+    printMatrix(workingMatrix)
     return workingMatrix
 }

@@ -4,6 +4,32 @@ import (
     "math/cmplx"
     "fmt"
 )
+func MatScale(A [][]complex128, scaleFactor complex128) [][]complex128{
+    n := len(A)
+    resultMatrix := make([][]complex128, n)
+    for i := 0; i < n; i++{
+        resultMatrix[i] = make([]complex128, n)
+    }
+    for i := 0; i < n; i++{
+        for j := 0; j < n; j++{
+            resultMatrix[i][j] = scaleFactor * A[i][j]
+        }
+    }
+    return resultMatrix
+}
+func MatAdd(A [][]complex128, B [][]complex128) [][]complex128 {
+     n := len(A)
+    resultMatrix := make([][]complex128, n)
+    for i := 0; i < n; i++{
+        resultMatrix[i] = make([]complex128, n)
+    }
+     for i := 0; i < n; i++{
+        for j := 0; j < n; j++{
+            resultMatrix[i][j] = A[i][j] + B[i][j]
+        }
+    }
+    return resultMatrix           
+}
 func MatSubtract(A [][]complex128, B[][]complex128) [][]complex128{
     n := len(A)
     resultMatrix := make([][]complex128, n)
@@ -94,7 +120,7 @@ func norm(v []complex128) float64 {
 func printMatrix(matrix [][]complex128) {
     for _, row := range matrix {
         for _, value := range row {
-            fmt.Printf("%6.2f +%6.2fi ", real(value), imag(value))
+            fmt.Printf("%6.9f +%6.9fi ", real(value), imag(value))
         }
         fmt.Println()
     }

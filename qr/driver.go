@@ -33,7 +33,9 @@ func main(){
         {complex(6, 3), complex(2, 8), complex(8, 6), complex(9, 5), complex(3, 7)},
         {complex(8, 4), complex(7, 9), complex(1, 8), complex(8, 7), complex(4, 2)},
         {complex(5, 5), complex(2, 0), complex(6, 0), complex(7, 9), complex(5, 5)},
+
     }
+    */
     matrix := [][]complex128{
         {complex(5, 1), complex(9, 6), complex(3, 2), complex(5, 1), complex(1, 1)},
         {complex(3, 2), complex(3, 7), complex(0, 4), complex(2, 3), complex(2, 4)},
@@ -41,7 +43,7 @@ func main(){
         {complex(8, 4), complex(7, 9), complex(1, 8), complex(8, 7), complex(4, 2)},
         {complex(5, 5), complex(2, 0), complex(6, 0), complex(7, 9), complex(5, 5)},
     }
-    */
+    /*
     matrix := [][]complex128{
         {complex(2, 0), complex(3, 0), complex(5, 0), complex(7, 0), complex(11, 0)},
         {complex(13, 0), complex(17, 0), complex(19, 0), complex(23, 0), complex(29, 0)},
@@ -49,6 +51,7 @@ func main(){
         {complex(53, 0), complex(59, 0), complex(61, 0), complex(67, 0), complex(71, 0)},
         {complex(73, 0), complex(79, 0), complex(83, 0), complex(89, 0), complex(97, 0)},
     }
+    */
     fmt.Println("Original Matrix:")
     printMatrix(matrix)
 
@@ -60,8 +63,11 @@ func main(){
     //A := MapplyGivens(hessenbergMatrix)
     // fmt.Println("Upper Triangular")
     // printMatrix(A)
-    eigenValueList := runIterations(hessenbergMatrix, 500)
+    eigenValueList, count := shiftedIterations(hessenbergMatrix)
+    //eigenValueList := runIterations(hessenbergMatrix, 80)
+
     for i := 0; i < len(eigenValueList); i++{
-        fmt.Printf("eigenvalue %d: %6.2f + %6.2fi\n", i + 1, real(eigenValueList[i]), imag(eigenValueList[i]))
+        fmt.Printf("eigenvalue %d: %6.6f + %6.6fi\n", i + 1, real(eigenValueList[i]), imag(eigenValueList[i]))
     }
+    fmt.Printf("\nNum of iterations: %d\n\n\n", count)
 }
