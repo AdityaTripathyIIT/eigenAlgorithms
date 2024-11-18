@@ -37,15 +37,9 @@ func shiftedIterations(A [][]complex128) ([]complex128, int){
             k += 1
             sigma_k = H[m-1][m-1]
             sigmaI := MatScale(I, sigma_k)
-            //fmt.Printf("sigmaI for iteration %d m = %d\n", count, m)
-            //printMatrix(sigmaI)
             toRotate := MatSubtract(H, sigmaI)
-            //fmt.Printf("H - sigmaI in iteration %d\n", count)
-            // printMatrix(toRotate)
             fmt.Printf("Value returned by MapplyGivens at iteration %d: \n", count)
             H = MatAdd(MapplyGivens(toRotate), sigmaI)
-            //fmt.Printf("RQ in iteration %d\n", count)
-            //printMatrix(H)
             if count > 1000{
                 break
             }

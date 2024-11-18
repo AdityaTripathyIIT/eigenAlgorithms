@@ -1,7 +1,7 @@
 package main
 
 import (
-    "math/cmplx"
+	"math/cmplx"
 )
 
 func solveJordanBlocks(A [][]complex128) {

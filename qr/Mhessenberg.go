@@ -22,9 +22,13 @@ func Mhessenberg(A [][]complex128) [][]complex128{
             u[i] = H[k + i +1][k]
         }
         normU := Mnorm(u)
-
+        if cmplx.Abs(normU) < 1e-15{
+            continue
+        }
         if cmplx.Abs(u[0]) > 1e-15 {
             u[0] += (u[0] / complex(cmplx.Abs(u[0]), 0)) * normU
+        } else {
+            u[0] += normU
         }
         normU = Mnorm(u)
         for i := 0; i < len(u); i++ {

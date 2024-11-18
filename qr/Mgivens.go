@@ -42,9 +42,7 @@ func MapplyGivens(A [][]complex128) [][]complex128{
         G_k[k][k + 1] = s_k
         Q = MatMultiply(G_k, Q)
         workingMatrix = MatMultiply(G_k, workingMatrix)
-       // workingMatrix = MatMultiply(workingMatrix, Hermitian(G_k))
     }
     workingMatrix = MatMultiply(workingMatrix, Hermitian(Q))
-    printMatrix(workingMatrix)
     return workingMatrix
 }
